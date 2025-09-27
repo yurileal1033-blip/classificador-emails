@@ -1,0 +1,12 @@
+texto,categoria
+"Solicito atualização urgente do sistema",Produtivo
+"Erro crítico detectado no servidor",Produtivo
+"Por favor, gerar relatório até amanhã",Produtivo
+"Problema na autenticação de usuário",Produtivo
+"Bom dia, segue piada engraçada",Improdutivo
+"Promoção imperdível da semana",Improdutivo
+"Convite para churrasco no fim de semana",Improdutivo
+"Mensagem de bom dia",Improdutivo
+"Mensagem de Feliz natal",Improdutivo
+"Urgencia, reuniao",Produtivo
+"Precisamos resolver esse error",Produtivo

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Classificador de Emails</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 30px; }
+        h1 { color: #333; }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .resultado { margin-top: 20px; }
+        textarea { width: 100%; height: 120px; padding: 10px; font-size: 14px; }
+        button { padding: 10px 20px; font-size: 16px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #45a049; }
+        .classificacao {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .mina { background: #d4edda; color: #155724; }
+        .improdutivo { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>📧 Classificador de Emails</h1>
+
+    <div class="card">
+        <form method="POST" enctype="multipart/form-data">
+            <label for="arquivo">Selecione um email (.txt):</label><br><br>
+            <input type="file" name="arquivo" id="arquivo" required>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    {% if resultado %}
+    <div class="card resultado">
+        <h2>Resultado</h2>
+
+        <p>
+            <strong>Classificação:</strong>
+            {% if resultado.classificacao == "Mina" %}
+                <span class="classificacao mina">Mina (Produtivo)</span>
+            {% elif resultado.classificacao == "Improdutivo" %}
+                <span class="classificacao improdutivo">Improdutivo</span>
+            {% else %}
+                <span class="classificacao">Indefinido</span>
+            {% endif %}
+        </p>
+
+        <p><strong>Email recebido:</strong></p>
+        <div style="background:#eee; padding:10px; border-radius:5px; white-space:pre-wrap;">
+            {{ resultado.mensagem }}
+        </div>
+
+        <p><strong>Sugestão de resposta:</strong></p>
+        <form method="POST" action="{{ url_for('enviar') }}">
+            <textarea name="resposta">{{ resultado.resposta }}</textarea>
+            <br><br>
+            <button type="submit">Enviar resposta</button>
+        </form>
+    </div>
+    {% endif %}
+</body>
+</html>
